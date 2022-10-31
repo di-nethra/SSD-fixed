@@ -6,7 +6,7 @@ const token = new Schema(
     {
         tokenId:String,
         tokenValidityTime:String,
-        tokenCreditBalance:Float
+        tokenCreditBalance:Number
     }
 
 );
