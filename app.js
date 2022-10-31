@@ -5,6 +5,8 @@ import multer from "multer";
 import "dotenv/config";
 import { connect } from "./utils/connection.js";
 
+import passengerRoutes from "./routes/passenger_routes.js";
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json())
@@ -14,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 connect();
 
+app.use("/ts", passengerRoutes);
 
 
 app.get("/", (req, res) => {
