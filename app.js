@@ -6,6 +6,7 @@ import "dotenv/config";
 import { connect } from "./utils/connection.js";
 
 import passengerRoutes from "./routes/passenger_routes.js";
+import tokenRoutes from "./routes/token_routes.js";
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 5000;
 connect();
 
 app.use("/ts", passengerRoutes);
+app.use("/ts", tokenRoutes)
 
 
 app.get("/", (req, res) => {
