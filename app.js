@@ -11,6 +11,7 @@ import busRoutes from "./routes/bus_routes.js";
 import driverRoutes from "./routes/driver_routes.js";
 import journeyRoutes from "./routes/journey_routes.js";
 import profileRoutes from "./routes/profile_routes.js";
+import otRoutes from "./routes/ot_routes.js";
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/ts", busRoutes)
 app.use("/ts", driverRoutes)
 app.use("/ts", journeyRoutes)
 app.use("/ts", profileRoutes)
+app.use("/ts", otRoutes)
 
 
 app.get("/", (req, res) => {
