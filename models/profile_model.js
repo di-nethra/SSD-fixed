@@ -9,7 +9,8 @@ const user = new Schema(
         email:String,
         address:String,
         nic:String,
-        cardType:String
+        cardType:String,
+        role:String
     }
 
 );
