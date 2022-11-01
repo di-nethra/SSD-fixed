@@ -1,6 +1,6 @@
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
@@ -17,10 +17,10 @@ import RequestOTModal from './components/driver_profile/RequestOTModal';
 function App() {
   return (
     <>
-    {/* <Router>
-    <div>
+    <Router>
+
     
-      <Switch>
+      <Routes>
         <Route path="/driverAccount">
           <DriverAccountTabs />
         </Route>
@@ -36,9 +36,9 @@ function App() {
         <Route path="/driverOT">
           <OtTabs />
         </Route>
-      </Switch>
-    </div>
-  </Router> */}
+      </Routes>
+    
+  </Router> 
   <div className="App">
      {/* <UserAccountDashboard /> */}
      {/* <AccountBalancePage /> */}
