@@ -109,6 +109,7 @@ const LoginPage = () => {
                       variant="contained"
                       size="large"
                       onClick={handleAddCredits}
+                      fullWidth
                     >
                       Login
                     </Button>

@@ -12,6 +12,7 @@ import OtTabs from './components/driver_profile/DriverOTDashboard';
 import DriverAccountTabs from './components/driver_profile/DriverAccountDashboard';
 import RequestOTModal from './components/driver_profile/RequestOTModal';
 import LoginPage from "./components/login/LoginPage";
+import SignUpPage from "./components/login/SignUpPage";
 
 
 
@@ -48,6 +49,8 @@ function App() {
      {/* <OtTabs /> */}
      {/* <RequestOTModal /> */}
      <LoginPage />
+     {/* <SignUpPage /> */}
+     
     </div>
   </>
 
