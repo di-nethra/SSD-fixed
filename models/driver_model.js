@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const driver = new Schema(
     {
-        employeeId:Integer,
+        employeeId:Number,
         employeeName:String,
         email:String,
         nicNo:String,

@@ -2,7 +2,7 @@ import { Bus } from "../models/bus_model.js";
 
 export const createbusRepo = (data) =>
 Bus.create(data)
-        .then((bBusus) => {
+        .then((Bus) => {
             return Promise.resolve(Bus);
         })
         .catch(() => {
