@@ -5,8 +5,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import busImage from "../../Assests/busImage.png";
-const AccountBalancePage = () => {
+import paymentImage from "../../Assests/payment.png";
+import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+const AddCredits = () => {
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -36,56 +37,75 @@ const AccountBalancePage = () => {
               }}
               sx={{ fontSize: 32 }}
             >
-              Account Balance
+              Add Credits
             </Typography>
             <hr />
             <Grid container spacing={4}>
               <Grid item xs={6}>
-                <CardContent>
-                  <Typography
-                    style={{
-                      textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
-                    }}
-                    variant="body2"
-                  >
-                    Last Added Date:
-                  </Typography>
-                  <Typography
-                    style={{
-                      textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
-                    }}
-                    variant="body2"
-                  >
-                    Last Added Amount:
-                  </Typography>
-
-                  <Typography
-                    style={{
-                      textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
-                    }}
-                    variant="body2"
-                  >
-                    Account Balance:
-                  </Typography>
-                </CardContent>
-              </Grid>
-              <Grid item xs={6}>
                 <img
-                  src={busImage}
-                  style={{ height: "200px" }}
-                  alt=""
+                  src={paymentImage}
+                  style={{ height: "200px", marginTop: "20px" }}
+                  alt="addCredits"
                   busImage
                 />
+                   <CardActions
+              style={{
+                justifyContent: "center",
+                marginBottom: "10px",
+                marginTop: "50px",
+              }}
+            >
+              <Button color="warning" variant="contained" size="large">
+               Edit Card Details
+              </Button>
+            </CardActions>
               </Grid>
-            </Grid>
+              <Grid item xs={6}>
+                <CardContent>
+                  <div style={{display:"flex"}}>
+                 
+                    <TextField
+                      style={{
+                          marginLeft:"45px",
+                        textAlign: "start",
+                      }}
+                      id="outlined-basic"
+                      label="Amount"
+                      variant="outlined"
+                    />
+                  </div>
 
-            <CardActions
+                  <Typography
+                    style={{
+                      textAlign: "start",
+                      marginLeft: "50px",
+                      marginTop: "30px",
+                    }}
+                    variant="body2"
+                  >
+                    Credit Card:
+                  </Typography>
+                  <Typography
+                    style={{
+                      textAlign: "start",
+                      marginLeft: "50px",
+                      marginTop: "30px",
+                    }}
+                    variant="body2"
+                  >
+                    CVC:
+                  </Typography>
+                  <Typography
+                    style={{
+                      textAlign: "start",
+                      marginLeft: "50px",
+                      marginTop: "30px",
+                    }}
+                    variant="body2"
+                  >
+                    Exp Date:
+                  </Typography>
+                  <CardActions
               style={{
                 justifyContent: "center",
                 marginBottom: "10px",
@@ -96,6 +116,11 @@ const AccountBalancePage = () => {
                 Add Credits
               </Button>
             </CardActions>
+                </CardContent>
+              </Grid>
+            </Grid>
+
+       
           </Card>
         </Grid>
         <Grid item xs={3}></Grid>
@@ -104,4 +129,4 @@ const AccountBalancePage = () => {
   );
 };
 
-export default AccountBalancePage;
+export default AddCredits;
