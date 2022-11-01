@@ -48,25 +48,24 @@ const AddCredits = () => {
                   alt="addCredits"
                   busImage
                 />
-                   <CardActions
-              style={{
-                justifyContent: "center",
-                marginBottom: "10px",
-                marginTop: "50px",
-              }}
-            >
-              <Button color="warning" variant="contained" size="large">
-               Edit Card Details
-              </Button>
-            </CardActions>
+                <CardActions
+                  style={{
+                    justifyContent: "center",
+                    marginBottom: "10px",
+                    marginTop: "95px",
+                  }}
+                >
+                  <Button color="warning" variant="contained" size="large">
+                    Edit Card Details
+                  </Button>
+                </CardActions>
               </Grid>
               <Grid item xs={6}>
                 <CardContent>
-                  <div style={{display:"flex"}}>
-                 
+                  <div style={{ display: "flex" }}>
                     <TextField
                       style={{
-                          marginLeft:"45px",
+                        marginLeft: "45px",
                         textAlign: "start",
                       }}
                       id="outlined-basic"
@@ -75,52 +74,52 @@ const AddCredits = () => {
                     />
                   </div>
 
-                  <Typography
+                  <TextField
                     style={{
+                      marginLeft: "45px",
                       textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
+                      marginTop: "10px",
                     }}
-                    variant="body2"
-                  >
-                    Credit Card:
-                  </Typography>
-                  <Typography
+                    id="outlined-basic"
+                    label="Card Number"
+                    variant="outlined"
+                  />
+
+                  <TextField
                     style={{
+                      marginLeft: "45px",
                       textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
+                      marginTop: "10px",
                     }}
-                    variant="body2"
-                  >
-                    CVC:
-                  </Typography>
-                  <Typography
+                    id="outlined-basic"
+                    label="CVC"
+                    variant="outlined"
+                  />
+                  <TextField
                     style={{
+                      marginLeft: "45px",
                       textAlign: "start",
-                      marginLeft: "50px",
-                      marginTop: "30px",
+                      marginTop: "10px",
                     }}
-                    variant="body2"
-                  >
-                    Exp Date:
-                  </Typography>
+                    id="outlined-basic"
+                    label="EXP Date"
+                    variant="outlined"
+                  />
                   <CardActions
-              style={{
-                justifyContent: "center",
-                marginBottom: "10px",
-                marginTop: "50px",
-              }}
-            >
-              <Button color="warning" variant="contained" size="large">
-                Add Credits
-              </Button>
-            </CardActions>
+                    style={{
+                      justifyContent: "center",
+                      marginBottom: "10px",
+                      marginTop: "50px",
+                      marginRight:"100px"
+                    }}
+                  >
+                    <Button color="warning" variant="contained" size="large">
+                      Add Credits
+                    </Button>
+                  </CardActions>
                 </CardContent>
               </Grid>
             </Grid>
-
-       
           </Card>
         </Grid>
         <Grid item xs={3}></Grid>
