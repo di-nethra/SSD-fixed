@@ -1,16 +1,12 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Label } from "@material-ui/icons";
 import profileIcon from "../../Assests/userProfileImage.png";
-import { fontWeight } from "@mui/system";
 const UserAccountDashboard = () => {
   return (
     <div>
@@ -46,7 +42,7 @@ const UserAccountDashboard = () => {
       <Grid container spacing={4} style={{ marginTop: "100px" }}>
         <Grid item xs={1}></Grid>
         <Grid item xs={6}>
-          <Card sx={{ minWidth: 575 }} style={{backgroundColor:"#f5f5f5"}}>
+          <Card sx={{ minWidth: 575 }} style={{ backgroundColor: "#f5f5f5" }}>
             <CardContent>
               <Typography sx={{ fontSize: 32 }}>Profile</Typography>
               <hr style={{ marginLeft: "60px", marginRight: "60px" }} />
@@ -122,7 +118,7 @@ const UserAccountDashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={4}>
-          <Card sx={{ minWidth: 475 }} style={{backgroundColor:"#f5f5f5"}}>
+          <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5" }}>
             <CardContent>
               <img
                 src={profileIcon}
