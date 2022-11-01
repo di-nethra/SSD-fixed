@@ -7,6 +7,7 @@ import { connect } from "./utils/connection.js";
 
 import passengerRoutes from "./routes/passenger_routes.js";
 import tokenRoutes from "./routes/token_routes.js";
+import busRoutes from "./routes/bus_routes.js";
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ connect();
 
 app.use("/ts", passengerRoutes);
 app.use("/ts", tokenRoutes)
+app.use("/ts", busRoutes)
 
 
 app.get("/", (req, res) => {
