@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const connect = () => {
-  mongoose.connect("mongodb+srv://admin123:admin123@sliitrpm.uw5wb.mongodb.net/?retryWrites=true&w=majority", {
+  mongoose.connect("mongodb+srv://admin:admin123@cluster0.s8d5qik.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
