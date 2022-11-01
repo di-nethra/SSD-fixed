@@ -12,6 +12,7 @@ import driverRoutes from "./routes/driver_routes.js";
 import journeyRoutes from "./routes/journey_routes.js";
 import profileRoutes from "./routes/profile_routes.js";
 import otRoutes from "./routes/ot_routes.js";
+import creditRoutes from "./routes/credit_routes.js";
 
 const app = express();
 app.use(cors());
@@ -29,6 +30,7 @@ app.use("/ts", driverRoutes)
 app.use("/ts", journeyRoutes)
 app.use("/ts", profileRoutes)
 app.use("/ts", otRoutes)
+app.use("/ts", creditRoutes)
 
 
 app.get("/", (req, res) => {
