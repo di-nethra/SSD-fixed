@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const bus = new Schema(
     {
-        busid:Integer,
+        busid:String,
         owner:String,
         routeName:String,
         busRegisterNumber:String,
