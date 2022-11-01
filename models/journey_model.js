@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const journey = new Schema(
     {
-        jouneyCode:Integer,
+        jouneyCode:Number,
         startUpLocation:String,
         destination:String,
         departureTime:String,
