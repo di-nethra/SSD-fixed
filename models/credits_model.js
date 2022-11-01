@@ -7,7 +7,7 @@ const credit = new Schema(
         amount:Number,
         creditCard:String,
         cvc:String,
-        ExpDate:String
+        expDate:String
     }
 
 );
