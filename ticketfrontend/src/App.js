@@ -11,6 +11,7 @@ import TabsView from './components/driver_profile/DriverAccountDashboard';
 import OtTabs from './components/driver_profile/DriverOTDashboard';
 import DriverAccountTabs from './components/driver_profile/DriverAccountDashboard';
 import RequestOTModal from './components/driver_profile/RequestOTModal';
+import LoginPage from "./components/login/LoginPage";
 
 
 
@@ -42,10 +43,11 @@ function App() {
   <div className="App">
      {/* <UserAccountDashboard /> */}
      {/* <AccountBalancePage /> */}
-     <AddCredits />
+     {/* <AddCredits /> */}
      {/* <DriverAccountTabs /> */}
      {/* <OtTabs /> */}
      {/* <RequestOTModal /> */}
+     <LoginPage />
     </div>
   </>
 

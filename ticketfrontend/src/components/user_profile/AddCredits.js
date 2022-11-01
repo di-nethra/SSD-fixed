@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,7 +7,29 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import paymentImage from "../../Assests/payment.png";
 import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import axios from "axios"
 const AddCredits = () => {
+
+    const [cardNumber,setCardNumber]=useState("");
+    const [amount,setAmount]=useState(0);
+    const [cvc,setCVC]=useState("");
+    const [expDate,setExpDate]=useState("");
+
+    const handleAddCredits=()=>{
+        axios.post("http://localhost:5000/ts/credit",{
+            amount:amount,
+            creditCard:cardNumber,
+            cvc:cvc,
+            expDate:expDate
+        }).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+
+
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -71,6 +93,9 @@ const AddCredits = () => {
                       id="outlined-basic"
                       label="Amount"
                       variant="outlined"
+                      onChange={(e)=>{
+                          setAmount(parseInt(e.target.value))
+                      }}
                     />
                   </div>
 
@@ -83,6 +108,9 @@ const AddCredits = () => {
                     id="outlined-basic"
                     label="Card Number"
                     variant="outlined"
+                    onChange={(e)=>{
+                        setCardNumber(e.target.value)
+                    }}
                   />
 
                   <TextField
@@ -94,6 +122,9 @@ const AddCredits = () => {
                     id="outlined-basic"
                     label="CVC"
                     variant="outlined"
+                    onChange={(e)=>{
+                        setCVC(e.target.value)
+                    }}
                   />
                   <TextField
                     style={{
@@ -104,6 +135,9 @@ const AddCredits = () => {
                     id="outlined-basic"
                     label="EXP Date"
                     variant="outlined"
+                    onChange={(e)=>{
+                        setExpDate(e.target.value)
+                    }}
                   />
                   <CardActions
                     style={{
@@ -113,7 +147,7 @@ const AddCredits = () => {
                       marginRight:"100px"
                     }}
                   >
-                    <Button color="warning" variant="contained" size="large">
+                    <Button color="warning" variant="contained" size="large" onClick={handleAddCredits}>
                       Add Credits
                     </Button>
                   </CardActions>
