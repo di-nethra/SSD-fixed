@@ -7,9 +7,9 @@ import {
 } from "../repository/profile_repo.js";
 
 export const saveUserService = async (data) => {
-    const { userName, password, email, address, nic, cardType } = data;
+    const { userName, password, email, address, nic, cardType, role } = data;
     try {
-        await createUserRepo({ userName, password, email, address, nic, cardType });
+        await createUserRepo({ userName, password, email, address, nic, cardType, role });
         return Promise.resolve("Successfully saved User.");
     } catch (err) {
         throw new Error(err.message, err.status);
