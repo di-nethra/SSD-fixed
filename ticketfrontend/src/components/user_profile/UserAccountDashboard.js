@@ -11,6 +11,10 @@ import profileIcon from "../../Assests/userProfileImage.png";
 const UserAccountDashboard = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
+  const accountPage = () => {
+    window.location.href = `/accountBalance`;
+  }
+
   const deleteProfile = () => {
    
     axios
@@ -56,7 +60,7 @@ const UserAccountDashboard = () => {
             QR Code
           </Button>
 
-          <Button color="warning" variant="contained" size="large">
+          <Button color="warning" variant="contained" size="large" onClick={accountPage}>
             Account Balance
           </Button>
         </Grid>
