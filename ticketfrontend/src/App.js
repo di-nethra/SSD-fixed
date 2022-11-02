@@ -19,39 +19,25 @@ import SignUpPage from "./components/login/SignUpPage";
 function App() {
   return (
     <>
-    {/* <Router>
-
-    
+    <Router>
       <Routes>
-        <Route path="/driverAccount">
-          <DriverAccountTabs />
+      <Route path="/" element={<LoginPage />}>
         </Route>
-        <Route path="/userAccount">
-          <UserAccountDashboard />
+        <Route path="/driver/Account" element={<DriverAccountTabs />}>
         </Route>
-        <Route path="/addCredit">
-          <AddCredits />
+        <Route path="/register" element={<SignUpPage />}>
         </Route>
-        <Route path="/accountBalance">
-          <AccountBalancePage />
+        <Route path="/customer/Account" element={<UserAccountDashboard />}>
         </Route>
-        <Route path="/driverOT">
-          <OtTabs />
+        <Route path="/addCredit" element={<AddCredits />}>
+        </Route>
+        <Route path="/accountBalance" element={<AccountBalancePage />}>
+        </Route>
+        <Route path="/driverOT" element={<OtTabs />}>
         </Route>
       </Routes>
     
-  </Router>  */}
-  <div className="App">
-     {/* <UserAccountDashboard /> */}
-     {/* <AccountBalancePage /> */}
-     {/* <AddCredits /> */}
-     {/* <DriverAccountTabs /> */}
-     {/* <OtTabs /> */}
-     {/* <RequestOTModal /> */}
-     <LoginPage />
-     {/* <SignUpPage /> */}
-     
-    </div>
+  </Router>  
   </>
 
   );

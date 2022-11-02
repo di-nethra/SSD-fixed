@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -8,6 +9,27 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import profileIcon from "../../Assests/userProfileImage.png";
 const UserAccountDashboard = () => {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  const deleteProfile = () => {
+   
+    axios
+      .delete(`http://localhost:5000/ts/profile/${user._id}`)
+      .then((res) => {
+        console.log(res);
+        window.confirm("Do you want to delete your profile?");
+        if(true){
+        alert("Successfuly deleted!")
+        localStorage.removeItem('loggedInUser');
+        window.location.href = `/`;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error occured")
+      });
+  };
+
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -21,7 +43,7 @@ const UserAccountDashboard = () => {
             }}
             sx={{ fontSize: 32 }}
           >
-            Hii John....
+            Hii {user.userName}....
           </Typography>
         </Grid>
         <Grid item xs={4}>
@@ -54,7 +76,7 @@ const UserAccountDashboard = () => {
                 }}
                 variant="body2"
               >
-                User Name:
+                User Name: {user.userName}
               </Typography>
               <Typography
                 style={{
@@ -64,7 +86,7 @@ const UserAccountDashboard = () => {
                 }}
                 variant="body2"
               >
-                Address:
+                Address: {user.address}
               </Typography>
               <Typography
                 style={{
@@ -74,7 +96,7 @@ const UserAccountDashboard = () => {
                 }}
                 variant="body2"
               >
-                Mobile Number:
+                Mobile Number: 032-123456789
               </Typography>
               <Typography
                 style={{
@@ -84,7 +106,7 @@ const UserAccountDashboard = () => {
                 }}
                 variant="body2"
               >
-                NIC:
+                NIC: {user.nic}
               </Typography>
               <Typography
                 style={{
@@ -94,7 +116,7 @@ const UserAccountDashboard = () => {
                 }}
                 variant="body2"
               >
-                Card Type:
+                Card Type: {user.cardType}
               </Typography>
 
               <Typography
@@ -127,10 +149,10 @@ const UserAccountDashboard = () => {
               />
               <Typography sx={{ fontSize: 32 }}>
                 <hr style={{ marginLeft: "60px", marginRight: "60px" }} />
-                John Smith
+                {user.userName}
               </Typography>
               <Typography style={{ marginTop: "20px" }} variant="body2">
-                johnsmith@gmail.com
+                {user.email}
               </Typography>
             </CardContent>
 
@@ -142,7 +164,7 @@ const UserAccountDashboard = () => {
             <CardActions
               style={{ justifyContent: "center", marginBottom: "20px" }}
             >
-              <Button color="warning" variant="contained" size="large">
+              <Button color="warning" variant="contained" size="large" onClick={deleteProfile}>
                 Delete Profile
               </Button>
             </CardActions>

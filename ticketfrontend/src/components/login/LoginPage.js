@@ -9,21 +9,22 @@ import loginImage from "../../Assests/login.png";
 import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import axios from "axios";
 const LoginPage = () => {
-  const [cardNumber, setCardNumber] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [cvc, setCVC] = useState("");
-  const [expDate, setExpDate] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleAddCredits = () => {
     axios
-      .post("http://localhost:5000/ts/credit", {
-        amount: amount,
-        creditCard: cardNumber,
-        cvc: cvc,
-        expDate: expDate,
-      })
+      .get("http://localhost:5000/ts/profile")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        for(let i=0;i<res.data.length;i++){
+          if(res.data[i].userName === userName && res.data[i].password === password){
+            alert("Successfuly loggedIn!")
+        localStorage.setItem("loggedInUser", JSON.stringify(res.data[i]));
+        window.location.href = `/${res.data[i].role}/Account`;
+        break;
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +73,7 @@ const LoginPage = () => {
                       label="User Name"
                       variant="outlined"
                       onChange={(e) => {
-                        setAmount(parseInt(e.target.value));
+                        setUserName(e.target.value);
                       }}
                     />
                   </div>
@@ -87,12 +88,12 @@ const LoginPage = () => {
                     label="Password"
                     variant="outlined"
                     onChange={(e) => {
-                      setCardNumber(e.target.value);
+                      setPassword(e.target.value);
                     }}
                   />
                   <br />
                     <div style={{marginTop:"30px",marginLeft:"40px"}}>
-                    <a  href="#">Not a registered user? Sign Up!</a>
+                    <a  href="/register">Not a registered user? Sign Up!</a>
                     </div>
                 
 

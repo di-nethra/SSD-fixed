@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import busImage from "../../Assests/busImage.png";
 const AccountBalancePage = () => {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -20,7 +21,7 @@ const AccountBalancePage = () => {
             }}
             sx={{ fontSize: 32 }}
           >
-            Hii John....
+            Hii {user.userName}....
           </Typography>
         </Grid>
         <Grid item xs={4}></Grid>

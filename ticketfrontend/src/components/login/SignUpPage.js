@@ -15,24 +15,35 @@ import {
 } from "@mui/material";
 import axios from "axios";
 const SignUpPage = () => {
-  const [cardNumber, setCardNumber] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [cvc, setCVC] = useState("");
-  const [expDate, setExpDate] = useState("");
+  const [userName, setuserName] = useState("");
+  const [password, setpassword] = useState("");
+  const [email, setemail] = useState("");
+  const [address, setaddress] = useState("");
+  const [nic, setnic] = useState("");
+  const [role, setrole] = useState("");
+  const [cardType, setcardType] = useState("");
 
-  const handleAddCredits = () => {
+  const handleRegister = () => {
+    const data={
+      userName: userName,
+      password: password,
+      email: email,
+      address: address,
+      nic: nic,
+      cardType:cardType,
+      role:role
+    }
     axios
-      .post("http://localhost:5000/ts/credit", {
-        amount: amount,
-        creditCard: cardNumber,
-        cvc: cvc,
-        expDate: expDate,
-      })
+      .post("http://localhost:5000/ts/profile", data)
       .then((res) => {
         console.log(res);
+        alert("Successfuly Registered!")
+        localStorage.setItem("loggedInUser", JSON.stringify(data));
+        window.location.href = `/${role}/Account`;
       })
       .catch((err) => {
         console.log(err);
+        alert("Error occured")
       });
   };
 
@@ -79,7 +90,7 @@ const SignUpPage = () => {
                     label="User Name"
                     variant="outlined"
                     onChange={(e) => {
-                      setAmount(parseInt(e.target.value));
+                      setuserName(e.target.value);
                     }}
                   />
                   <TextField
@@ -93,7 +104,7 @@ const SignUpPage = () => {
                     label="Password"
                     variant="outlined"
                     onChange={(e) => {
-                      setAmount(parseInt(e.target.value));
+                      setpassword(e.target.value);
                     }}
                   />
                   <TextField
@@ -107,7 +118,7 @@ const SignUpPage = () => {
                     label="Email"
                     variant="outlined"
                     onChange={(e) => {
-                      setAmount(parseInt(e.target.value));
+                      setemail(e.target.value);
                     }}
                   />
 
@@ -122,7 +133,7 @@ const SignUpPage = () => {
                     label="address"
                     variant="outlined"
                     onChange={(e) => {
-                      setCardNumber(e.target.value);
+                      setaddress(e.target.value);
                     }}
                   />
                   <TextField
@@ -136,7 +147,7 @@ const SignUpPage = () => {
                     label="NIC"
                     variant="outlined"
                     onChange={(e) => {
-                      setCardNumber(e.target.value);
+                      setnic(e.target.value);
                     }}
                   />
 
@@ -152,10 +163,12 @@ const SignUpPage = () => {
                       id="demo-simple-select"
                       // value={age}
                       label="Role"
-                      // onChange={handleChange}
+                      onChange={(e) => {
+                        setrole(e.target.value);
+                      }}
                     >
-                      <MenuItem value={10}>Customer</MenuItem>
-                      <MenuItem value={20}>Driver</MenuItem>
+                      <MenuItem value="customer">Customer</MenuItem>
+                      <MenuItem value="driver">Driver</MenuItem>
                     </Select>
                   </FormControl>
                   <TextField
@@ -169,12 +182,12 @@ const SignUpPage = () => {
                     variant="outlined"
                     fullWidth
                     onChange={(e) => {
-                      setCardNumber(e.target.value);
+                      setcardType(e.target.value);
                     }}
                   />
                   <br />
                   <div style={{ marginTop: "30px", marginLeft: "40px" }}>
-                    <a href="#">Already a registered user? Login!</a>
+                    <a href="/">Already a registered user? Login!</a>
                   </div>
 
                   <CardActions
@@ -189,7 +202,7 @@ const SignUpPage = () => {
                       color="warning"
                       variant="contained"
                       size="large"
-                      onClick={handleAddCredits}
+                      onClick={handleRegister}
                       fullWidth
                     >
                       Sign Up

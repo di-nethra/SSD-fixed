@@ -11,11 +11,13 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import profileIcon from "../../Assests/userProfileImage.png";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 
 
 const DriverAccountDashboard = (props) => {
     const { children, value, index, ...other } = props;
+    
 
     return (
       <div
@@ -54,6 +56,27 @@ const DriverAccountDashboard = (props) => {
       setValue(newValue);
     };
 
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    const deleteProfile = () => {
+   
+      axios
+        .delete(`http://localhost:5000/ts/profile/${user._id}`)
+        .then((res) => {
+          console.log(res);
+          window.confirm("Do you want to delete your profile?");
+          if(true){
+          alert("Successfuly deleted!")
+          localStorage.removeItem('loggedInUser');
+          window.location.href = `/`;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Error occured")
+        });
+    };
+
     return (
 
         <div>
@@ -68,7 +91,7 @@ const DriverAccountDashboard = (props) => {
               }}
               sx={{ fontSize: 32 }}
             >
-              Hii John....
+              Hii {user.userName}....
             </Typography>
           </Grid>
           <Grid item xs={4}>
@@ -110,7 +133,7 @@ const DriverAccountDashboard = (props) => {
                   }}
                   variant="body2"
                 >
-                  Employee ID:
+                  Employee ID: {user.nic}
                 </Typography>
                 <Typography
                   style={{
@@ -120,7 +143,7 @@ const DriverAccountDashboard = (props) => {
                   }}
                   variant="body2"
                 >
-                  Employee Name:
+                  Employee Name: {user.userName}
                 </Typography>
                 <Typography
                   style={{
@@ -130,7 +153,7 @@ const DriverAccountDashboard = (props) => {
                   }}
                   variant="body2"
                 >
-                 Address:
+                 Address: {user.address}
                 </Typography>
                 <Typography
                   style={{
@@ -140,7 +163,7 @@ const DriverAccountDashboard = (props) => {
                   }}
                   variant="body2"
                 >
-                  Mobile Number:
+                  Mobile Number: 032-5558874
                 </Typography>
             
   
@@ -255,10 +278,10 @@ const DriverAccountDashboard = (props) => {
                 />
                 <Typography sx={{ fontSize: 32 }}>
                   <hr style={{ marginLeft: "60px", marginRight: "60px" }} />
-                  John Smith
+                  {user.userName}
                 </Typography>
                 <Typography style={{ marginTop: "20px" }} variant="body2">
-                  johnsmith@gmail.com
+                  {user.email}
                 </Typography>
               </CardContent>
   
@@ -270,7 +293,7 @@ const DriverAccountDashboard = (props) => {
               <CardActions
                 style={{ justifyContent: "center", marginBottom: "95px" }}
               >
-                <Button color="warning" variant="contained" size="large">
+                <Button color="warning" variant="contained" size="large" onClick={deleteProfile}>
                   Delete Profile
                 </Button>
               </CardActions>
