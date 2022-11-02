@@ -10,7 +10,6 @@ import AddCredits from './components/user_profile/AddCredits';
 import TabsView from './components/driver_profile/DriverAccountDashboard';
 import OtTabs from './components/driver_profile/DriverOTDashboard';
 import DriverAccountTabs from './components/driver_profile/DriverAccountDashboard';
-import RequestOTModal from './components/driver_profile/RequestOTModal';
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
 import NavBar from "./components/Common/NavBar";
@@ -36,8 +35,6 @@ function App() {
         <Route path="/accountBalance" element={<AccountBalancePage />}>
         </Route>
         <Route path="/driverOT" element={<OtTabs />}>
-        </Route>
-        <Route path="/requestOtModal" element={<RequestOTModal />}>
         </Route>
       </Routes>
     

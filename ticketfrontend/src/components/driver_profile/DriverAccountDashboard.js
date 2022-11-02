@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -20,6 +20,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { useState } from "react";
 
 const DriverAccountDashboard = (props) => {
   const { children, value, index, ...other } = props;
@@ -60,6 +61,12 @@ export default function DriverAccountTabs() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+    const [date,setDate]=useState("")
+    const [shift,setShift]=useState("")
+    const [purpose,setPurpose]=useState("")
+    const [route,setRoute]=useState("")
+    const [loggedUserName,setLoggedUserName]=useState("")
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -96,6 +103,31 @@ export default function DriverAccountTabs() {
     p: 10,
   };
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (user) {
+      setLoggedUserName(user.userName);
+    }
+  }, []);
+  const handleHistory=()=>{
+    window.location.href="/driverOT"
+  }
+
+  const  handleOtRequest=async()=>{
+    await axios.post("http://localhost:5000/ts/ot",{
+        userName:loggedUserName,
+        date:date,
+        shift:shift,
+        purpose:purpose,
+        route:route,
+        status:"pending",
+        reason:"pending"
+    }).then(res=>{
+        console.log();
+    }).catch(err=>{
+        console.log(err);
+    })
+  }
   return (
     <div>
       <Modal
@@ -115,9 +147,9 @@ export default function DriverAccountTabs() {
               label="Date"
               variant="outlined"
 
-              // onChange={(e) => {
-              //   setPassword(e.target.value);
-              // }}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
             />
           </FormControl>
           <FormControl fullWidth>
@@ -129,11 +161,11 @@ export default function DriverAccountTabs() {
               }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              // value={age}
-              label="Route"
-              //   onChange={(e) => {
-              //     setrole(e.target.value);
-              //   }}
+            //   value={age}
+              label="Shift"
+                onChange={(e) => {
+                  setShift(e.target.value);
+                }}
             >
               <MenuItem value="day">Day</MenuItem>
               <MenuItem value="midDay">Mid Day</MenuItem>
@@ -149,9 +181,9 @@ export default function DriverAccountTabs() {
             label="Purpose"
             variant="outlined"
             fullWidth
-            // onChange={(e) => {
-            //   setPassword(e.target.value);
-            // }}
+            onChange={(e) => {
+              setPurpose(e.target.value);
+            }}
           />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Route</InputLabel>
@@ -164,9 +196,9 @@ export default function DriverAccountTabs() {
               id="demo-simple-select"
               // value={age}
               label="Route"
-              //   onChange={(e) => {
-              //     setrole(e.target.value);
-              //   }}
+                onChange={(e) => {
+                  setRoute(e.target.value);
+                }}
             >
               <MenuItem value="malabe">Malabe</MenuItem>
               <MenuItem value="kaduwela">Kaduwela</MenuItem>
@@ -183,7 +215,7 @@ export default function DriverAccountTabs() {
               color="warning"
               variant="contained"
               size="large"
-              //   onClick={handleAddCredits}
+              onClick={handleOtRequest}
               fullWidth
             >
               Request
@@ -372,11 +404,11 @@ export default function DriverAccountTabs() {
                       Request OT
                     </Button>
                   </CardActions>
-
+                
                   <CardActions
                     style={{ justifyContent: "center", marginBottom: "10px" }}
                   >
-                    <Button color="success" variant="contained" size="large">
+                    <Button onClick={handleHistory} color="success" variant="contained" size="large">
                       History
                     </Button>
                   </CardActions>
@@ -386,7 +418,7 @@ export default function DriverAccountTabs() {
           </Box>
         </Grid>
         <Grid item xs={4}>
-          <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5" }}>
+          <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5",textAlign:"center" }}>
             <CardContent>
               <img
                 src={profileIcon}

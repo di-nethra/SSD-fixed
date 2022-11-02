@@ -140,7 +140,7 @@ const UserAccountDashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={4}>
-          <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5" }}>
+          <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5",textAlign:"center"  }}>
             <CardContent>
               <img
                 src={profileIcon}
