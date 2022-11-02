@@ -13,6 +13,7 @@ import DriverAccountTabs from './components/driver_profile/DriverAccountDashboar
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
 import NavBar from "./components/Common/NavBar";
+import Journey from "./components/user_profile/journey"
 
 
 
@@ -35,6 +36,8 @@ function App() {
         <Route path="/accountBalance" element={<AccountBalancePage />}>
         </Route>
         <Route path="/driverOT" element={<OtTabs />}>
+        </Route>
+        <Route path="/journey" element={<Journey />}>
         </Route>
       </Routes>
     

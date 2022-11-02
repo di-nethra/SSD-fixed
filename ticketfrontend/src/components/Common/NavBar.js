@@ -67,6 +67,12 @@ let handleLogout = () =>{
                 </a>
               </li>
 
+              <li className="nav-item">
+                <a className="nav-link" aria-current="page" href="/journey">
+                  journey
+                </a>
+              </li>
+
             </ul>
             )}
 
