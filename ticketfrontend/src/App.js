@@ -37,6 +37,8 @@ function App() {
         </Route>
         <Route path="/driverOT" element={<OtTabs />}>
         </Route>
+        <Route path="/requestOtModal" element={<RequestOTModal />}>
+        </Route>
       </Routes>
     
   </Router>  
