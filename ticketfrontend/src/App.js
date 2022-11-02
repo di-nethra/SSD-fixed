@@ -13,12 +13,14 @@ import DriverAccountTabs from './components/driver_profile/DriverAccountDashboar
 import RequestOTModal from './components/driver_profile/RequestOTModal';
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
+import NavBar from "./components/Common/NavBar";
 
 
 
 function App() {
   return (
     <>
+    <NavBar />
     <Router>
       <Routes>
       <Route path="/" element={<LoginPage />}>
