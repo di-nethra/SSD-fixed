@@ -6,9 +6,9 @@ import {
 } from "../repository/ot_repo.js";
 
 export const saveOtService = async (data) => {
-    const { date, shift, purpose, route, status, reason } = data;
+    const { userName, date, shift, purpose, route, status, reason } = data;
     try {
-        await createOtRepo({ date, shift, purpose, route, status, reason });
+        await createOtRepo({ userName, date, shift, purpose, route, status, reason });
         return Promise.resolve("Successfully saved Ot.");
     } catch (err) {
         throw new Error(err.message, err.status);

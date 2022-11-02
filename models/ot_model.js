@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const ot = new Schema(
     {
+        userName:String,
         date:String,
         shift:String,
         purpose:String,
