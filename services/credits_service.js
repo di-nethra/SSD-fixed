@@ -6,9 +6,9 @@ import {
 } from "../repository/credits_repo.js";
 
 export const saveCreditService = async (data) => {
-    const { amount, creditCard, cvc, expDate } = data;
+    const { userName, amount, lastAdded, creditCard, cvc, expDate, date } = data;
     try {
-        await createCreditRepo({ amount, creditCard, cvc, expDate });
+        await createCreditRepo({ userName, amount, lastAdded, creditCard, cvc, expDate, date });
         return Promise.resolve("Successfully saved Credit.");
     } catch (err) {
         throw new Error(err.message, err.status);

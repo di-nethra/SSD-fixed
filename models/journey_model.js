@@ -9,7 +9,9 @@ const journey = new Schema(
         destination:String,
         departureTime:String,
         journeyEndTime:String,
-        date:String
+        date:String,
+        link:String,
+        seats:Number
     }
 
 );

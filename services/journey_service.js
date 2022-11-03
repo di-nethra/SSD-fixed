@@ -6,9 +6,9 @@ import {
 } from "../repository/journey_repo.js";
 
 export const saveJourneyService = async (data) => {
-    const { employeeId, employeeName, email, nicNo, drivingLicenId } = data;
+    const { jouneyCode, startUpLocation, destination, departureTime, journeyEndTime, date, link,seats } = data;
     try {
-        await createJourneyRepo({ employeeId, employeeName, email, nicNo, drivingLicenId });
+        await createJourneyRepo({ jouneyCode, startUpLocation, destination, departureTime, journeyEndTime, date, link,seats });
         return Promise.resolve("Successfully saved Journey.");
     } catch (err) {
         throw new Error(err.message, err.status);

@@ -13,6 +13,8 @@ import journeyRoutes from "./routes/journey_routes.js";
 import profileRoutes from "./routes/profile_routes.js";
 import otRoutes from "./routes/ot_routes.js";
 import creditRoutes from "./routes/credit_routes.js";
+import creditCardRoutes from "./routes/creditCard_routes.js";
+import ticketRoutes from "./routes/tickets_routes.js";
 
 const app = express();
 app.use(cors());
@@ -31,6 +33,8 @@ app.use("/ts", journeyRoutes)
 app.use("/ts", profileRoutes)
 app.use("/ts", otRoutes)
 app.use("/ts", creditRoutes)
+app.use("/ts", creditCardRoutes)
+app.use("/ts", ticketRoutes)
 
 
 app.get("/", (req, res) => {
