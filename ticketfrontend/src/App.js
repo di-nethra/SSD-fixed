@@ -14,6 +14,9 @@ import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
 import NavBar from "./components/Common/NavBar";
 import Journey from "./components/user_profile/journey"
+import CreditCard from "./components/user_profile/CreditCard"
+import EditCreditCard from "./components/user_profile/editCreditCard"
+import BookJoueney from "./components/user_profile/journeyBook"
 
 
 
@@ -38,6 +41,12 @@ function App() {
         <Route path="/driverOT" element={<OtTabs />}>
         </Route>
         <Route path="/journey" element={<Journey />}>
+        </Route>
+        <Route path="/creditCard" element={<CreditCard />}>
+        </Route>
+        <Route path="/editCreditCard" element={<EditCreditCard />}>
+        </Route>
+        <Route path="/bookJoueney:id" element={<BookJoueney />}>
         </Route>
       </Routes>
     

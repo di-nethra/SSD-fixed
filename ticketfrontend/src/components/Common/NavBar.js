@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 function NavBar() {
 
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const [loggedUser, setLoggedUser] = useState("null");
   const [loggedUserName, setLoggedUserName] = useState("User Not Logged In");
   
@@ -26,7 +28,7 @@ let handleLogout = () =>{
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
         <div className="container-fluid">
           <a className="navbar-brand " href="/">
-            RPM
+            Ticket MS
           </a>
 
           <button
@@ -51,6 +53,12 @@ let handleLogout = () =>{
                </a>
              </li>
 
+             <li className="nav-item">
+                <a className="nav-link" aria-current="page" href="/driver/Account">
+                  Dashboard
+                </a>
+              </li>
+
              </ul>
              )}
 
@@ -70,6 +78,18 @@ let handleLogout = () =>{
               <li className="nav-item">
                 <a className="nav-link" aria-current="page" href="/journey">
                   journey
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link" aria-current="page" href="/creditCard">
+                  Credit card
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link" aria-current="page" href="/customer/Account">
+                  Dashboard
                 </a>
               </li>
 

@@ -6,90 +6,33 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import paymentImage from "../../Assests/payment.png";
-import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import axios from "axios"
 const AddCredits = () => {
 
-  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  useEffect(() => {
-    axios
-  .get("http://localhost:5000/ts/creditCard")
-  .then((res) => {
-    for(let i=0;i<res.data.length;i++){
-      if(res.data[i].userId === user.userName){
-        setCard(res.data[i])
-      }
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-  }, []);
-  
-const [card, setCard] = useState([]);
+    const [cardNumber,setCardNumber]=useState("");
+    const [cvc,setCVC]=useState("");
+    const [expDate,setExpDate]=useState("");
 
-useEffect(() => {
-  axios
-.get("http://localhost:5000/ts/credit")
-.then((res) => {
-  for(let i=0;i<res.data.length;i++){
-    if(res.data[i].userName === user.userName){
-      setCredit(res.data[i])
+    const handleAddCreditCard=()=>{
+        axios.post("http://localhost:5000/ts/creditCard",{
+            userId: user.userName,
+            creditCard:cardNumber,
+            cvc:cvc,
+            expDate:expDate
+        }).then(res=>{
+            console.log(res);
+            alert("Successfully added!")
+        }).catch(err=>{
+            console.log(err);
+        })
     }
+
+const editCardDetails = () => {
+    window.location.href = `/editCreditCard`;
   }
-})
-.catch((err) => {
-  console.log(err);
-});
-}, []);
-
-const [credit, setCredit] = useState([]);
-
-console.log(credit.amount)
-
-
-      const [amount,setAmount]=useState(0);
-
-    const handleAddCredits=()=>{
-      axios.post(`http://localhost:5000/ts/credit/`,{
-        userName:user.userName,
-        amount:amount,
-        lastAdded:amount,
-        creditCard:card.creditCard,
-        cvc:card.cvc,
-        expDate:card.expDate,
-        date:new Date(),
-    }).then(res=>{
-        console.log(res);
-        alert("Successfully added!")
-    }).catch(err=>{
-        console.log(err);
-    })
-    }
-
-    const handleUpdateCredits=()=>{
-      axios.put(`http://localhost:5000/ts/credit/${credit._id}`,{
-          userName:user.userName,
-          amount:credit.amount+amount,
-          lastAdded:amount,
-          creditCard:card.creditCard,
-          cvc:card.cvc,
-          expDate:card.expDate,
-          date:new Date(),
-      }).then(res=>{
-          console.log(res);
-          alert("Successfully updated!")
-      }).catch(err=>{
-          console.log(err);
-      })
-  }
-    
-
-    const editPage = () => {
-      window.location.href = `/editCreditCard`;
-    }
-
 
 
   return (
@@ -105,7 +48,7 @@ console.log(credit.amount)
             }}
             sx={{ fontSize: 32 }}
           >
-            Hii John....
+            Hii {user.userName}....
           </Typography>
         </Grid>
         <Grid item xs={4}></Grid>
@@ -121,7 +64,7 @@ console.log(credit.amount)
               }}
               sx={{ fontSize: 32 }}
             >
-              Add Credits
+              Add Credit Card Details
             </Typography>
             <hr />
             <Grid container spacing={4}>
@@ -130,7 +73,7 @@ console.log(credit.amount)
                   src={paymentImage}
                   style={{ height: "200px", marginTop: "20px" }}
                   alt="addCredits"
-                  busImage
+                  paymentImage
                 />
                 <CardActions
                   style={{
@@ -139,7 +82,7 @@ console.log(credit.amount)
                     marginTop: "95px",
                   }}
                 >
-                  <Button color="warning" variant="contained" size="large" onClick={editPage}>
+                  <Button color="warning" variant="contained" size="large" onClick={editCardDetails}>
                     Edit Card Details
                   </Button>
                 </CardActions>
@@ -147,18 +90,7 @@ console.log(credit.amount)
               <Grid item xs={6}>
                 <CardContent>
                   <div style={{ display: "flex" }}>
-                    <TextField
-                      style={{
-                        marginLeft: "45px",
-                        textAlign: "start",
-                      }}
-                      id="outlined-basic"
-                      label="Amount"
-                      variant="outlined"
-                      onChange={(e)=>{
-                          setAmount(parseInt(e.target.value))
-                      }}
-                    />
+                    
                   </div>
 
                   <TextField
@@ -168,14 +100,11 @@ console.log(credit.amount)
                       marginTop: "10px",
                     }}
                     id="outlined-basic"
-                    label={card.creditCard}
+                    label="Card Number"
                     variant="outlined"
-                    inputProps={
-
-                      { readOnly: true, }
-            
-                    }
-                    
+                    onChange={(e)=>{
+                        setCardNumber(e.target.value)
+                    }}
                   />
 
                   <TextField
@@ -185,8 +114,11 @@ console.log(credit.amount)
                       marginTop: "10px",
                     }}
                     id="outlined-basic"
-                    label={card.cvc}
+                    label="CVC"
                     variant="outlined"
+                    onChange={(e)=>{
+                        setCVC(e.target.value)
+                    }}
                   />
                   <TextField
                     style={{
@@ -195,8 +127,11 @@ console.log(credit.amount)
                       marginTop: "10px",
                     }}
                     id="outlined-basic"
-                    label={card.expDate}
+                    label="EXP Date"
                     variant="outlined"
+                    onChange={(e)=>{
+                        setExpDate(e.target.value)
+                    }}
                   />
                   <CardActions
                     style={{
@@ -206,16 +141,9 @@ console.log(credit.amount)
                       marginRight:"100px"
                     }}
                   >
-                    {(!credit.amount) && (
-                    <Button color="warning" variant="contained" size="large" onClick={handleAddCredits}>
-                      Add Credits
+                    <Button color="warning" variant="contained" size="large" onClick={handleAddCreditCard}>
+                      Save
                     </Button>
-                    )}
-                    {(credit.amount>=1) && (
-                    <Button color="warning" variant="contained" size="large" onClick={handleUpdateCredits}>
-                      Add Credits
-                    </Button>
-                    )}
                   </CardActions>
                 </CardContent>
               </Grid>

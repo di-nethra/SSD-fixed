@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -6,8 +6,31 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import busImage from "../../Assests/busImage.png";
+import axios from "axios"
+
 const AccountBalancePage = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const addCreditPage = () => {
+    window.location.href = `/addCredit`;
+  }
+
+  useEffect(() => {
+    axios
+  .get("http://localhost:5000/ts/credit")
+  .then((res) => {
+    console.log(res.data);
+    for(let i=0;i<res.data.length;i++){
+      if(res.data[i].userName === user.userName){
+        setCredit(res.data[i])
+      }
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  }, []);
+  
+  const [credit, setCredit] = useState([]);
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -51,7 +74,7 @@ const AccountBalancePage = () => {
                     }}
                     variant="body2"
                   >
-                    Last Added Date:
+                    Last Added Date: {credit.date}
                   </Typography>
                   <Typography
                     style={{
@@ -61,7 +84,7 @@ const AccountBalancePage = () => {
                     }}
                     variant="body2"
                   >
-                    Last Added Amount:
+                    Last Added Amount: {credit.lastAdded}
                   </Typography>
 
                   <Typography
@@ -72,7 +95,7 @@ const AccountBalancePage = () => {
                     }}
                     variant="body2"
                   >
-                    Account Balance:
+                    Account Balance: {credit.amount}
                   </Typography>
                 </CardContent>
               </Grid>
@@ -93,7 +116,7 @@ const AccountBalancePage = () => {
                 marginTop: "50px",
               }}
             >
-              <Button color="warning" variant="contained" size="large">
+              <Button color="warning" variant="contained" size="large" onClick={addCreditPage}>
                 Add Credits
               </Button>
             </CardActions>

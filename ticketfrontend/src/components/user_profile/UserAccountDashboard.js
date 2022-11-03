@@ -8,11 +8,16 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import profileIcon from "../../Assests/userProfileImage.png";
+import { CreditCard } from "@mui/icons-material";
 const UserAccountDashboard = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
   const accountPage = () => {
     window.location.href = `/accountBalance`;
+  }
+
+  const editCard = () => {
+    window.location.href = `/editCreditCard`;
   }
 
   const deleteProfile = () => {
@@ -137,7 +142,7 @@ const UserAccountDashboard = () => {
             <CardActions
               style={{ justifyContent: "center", marginBottom: "10px" }}
             >
-              <Button color="warning" variant="contained" size="large">
+              <Button color="warning" variant="contained" size="large" onClick={editCard}>
                 Change Credit Card Details
               </Button>
             </CardActions>
