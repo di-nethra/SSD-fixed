@@ -1,9 +1,8 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser"
-import multer from "multer";
 import "dotenv/config";
-import { connect } from "./utils/connection.js";
+import { Connection } from "./utils/connection.js";
 
 import passengerRoutes from "./routes/passenger_routes.js";
 import tokenRoutes from "./routes/token_routes.js";
@@ -23,7 +22,10 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-connect();
+//singleton pattern to create one object from the connection class and freeze it
+const instance = new Connection()
+Object.freeze(instance)
+instance.connect();
 
 app.use("/ts", passengerRoutes);
 app.use("/ts", tokenRoutes)
