@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import paymentImage from "../../Assests/payment.png";
 import { TextField } from "@mui/material";
 import axios from "axios"
+import CryptoJS from "crypto-js";
+
 const AddCredits = () => {
 
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -17,8 +19,17 @@ const AddCredits = () => {
     const [expDate,setExpDate]=useState("");
     const [token, setToken] = useState("")
 
+    const encryptCreditCard = (creditCard) => {
+      
+      const encryptedCreditCard = CryptoJS.AES.encrypt(
+        creditCard,
+        "your-secret-key" 
+      ).toString();
+      return encryptedCreditCard;
+    };
 
    useEffect(() => {
+    
     axios.get('http://localhost:5000/getCSRFToken')
       .then((response) => {
         setToken(response.data.CSRFToken);
@@ -30,10 +41,11 @@ const AddCredits = () => {
   }, []);
    
     const handleAddCreditCard = async () => {
+      const encryptedCreditCard = encryptCreditCard(cardNumber);
       try {
           const response = await axios.post('http://localhost:5000/ts/creditCard', {
               userId: user.userName,
-              creditCard: cardNumber,
+              creditCard: encryptedCreditCard,
               cvc: cvc,
               expDate: expDate,
           }, {
@@ -44,6 +56,7 @@ const AddCredits = () => {
   
           console.log(response);
           alert('Successfully added!');
+          window.location.href = `/customer/Account`
       } catch (error) {
           console.error(error);
       }

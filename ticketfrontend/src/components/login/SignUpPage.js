@@ -14,6 +14,8 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
+import Joi from "joi";
+
 const SignUpPage = () => {
   const [userName, setuserName] = useState("");
   const [password, setpassword] = useState("");
@@ -24,7 +26,18 @@ const SignUpPage = () => {
   const [cardType, setcardType] = useState("");
 
   const handleRegister = () => {
-    const data={
+
+    const schema = Joi.object({
+      userName: Joi.string().alphanum().min(3).max(8).required(),
+      password: Joi.string().min(6).required(),
+      email: Joi.string().email({tlds: {allow: false}}).required(),
+      address: Joi.string().required(),
+      nic: Joi.string().alphanum().min(10).max(12).required(),
+      cardType: Joi.string().required(),
+      role: Joi.string().required(),
+    });
+
+    const data = {
       userName: userName,
       password: password,
       email: email,
@@ -33,6 +46,15 @@ const SignUpPage = () => {
       cardType:cardType,
       role:role
     }
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+      console.error('Validation Error:', error.details[0].message);
+      alert('Validation Error: ' + error.details[0].message);
+      return;
+    }
+
     axios
       .post("http://localhost:4000/ts/profile", data)
       .then((res) => {
