@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser"
+import csrf from "csurf";
+import rateLimit from "express-rate-limit";
+import cookieParser from "cookie-parser"
 import "dotenv/config";
 import { Connection } from "./utils/connection.js";
 
@@ -20,8 +23,23 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
+app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 4000;
+const csrfProtection = csrf({ cookie: { httpOnly: true, sameSite: 'none' } });
+//app.use(csrfProtection);
+app.get('/getCSRFToken', (req, res) => {
+  res.json({ CSRFToken: req.csrfToken() });
+});
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10, 
+  message: 'Too many requests from this IP, please try again later.',
+});
+
+app.use(limiter);
+
+const PORT = process.env.PORT || 5000;
 app.use(
   helmet.contentSecurityPolicy({
     directives: {

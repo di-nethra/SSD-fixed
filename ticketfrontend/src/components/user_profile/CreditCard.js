@@ -15,20 +15,39 @@ const AddCredits = () => {
     const [cardNumber,setCardNumber]=useState("");
     const [cvc,setCVC]=useState("");
     const [expDate,setExpDate]=useState("");
+    const [token, setToken] = useState("")
 
-    const handleAddCreditCard=()=>{
-        axios.post("http://localhost:5000/ts/creditCard",{
-            userId: user.userName,
-            creditCard:cardNumber,
-            cvc:cvc,
-            expDate:expDate
-        }).then(res=>{
-            console.log(res);
-            alert("Successfully added!")
-        }).catch(err=>{
-            console.log(err);
-        })
-    }
+
+   useEffect(() => {
+    axios.get('http://localhost:5000/getCSRFToken')
+      .then((response) => {
+        setToken(response.data.CSRFToken);
+        console.log("token", token)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch CSRF token', error);
+      });
+  }, []);
+   
+    const handleAddCreditCard = async () => {
+      try {
+          const response = await axios.post('http://localhost:5000/ts/creditCard', {
+              userId: user.userName,
+              creditCard: cardNumber,
+              cvc: cvc,
+              expDate: expDate,
+          }, {
+              headers: {
+                  'X-CSRF-Token': token, 
+              },
+          });
+  
+          console.log(response);
+          alert('Successfully added!');
+      } catch (error) {
+          console.error(error);
+      }
+  };
 
 const editCardDetails = () => {
     window.location.href = `/editCreditCard`;
