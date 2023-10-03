@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export class Connection{
   constructor(){}
   connect = () => {
-    mongoose.connect("mongodb+srv://admin:admin123@cluster0.s8d5qik.mongodb.net/?retryWrites=true&w=majority", {
+    mongoose.connect("mongodb+srv://anjanadinethra:8682123abc@cluster0.zxqokt6.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

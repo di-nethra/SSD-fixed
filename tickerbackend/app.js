@@ -14,14 +14,23 @@ import otRoutes from "./routes/ot_routes.js";
 import creditRoutes from "./routes/credit_routes.js";
 import creditCardRoutes from "./routes/creditCard_routes.js";
 import ticketRoutes from "./routes/tickets_routes.js";
+import helmet from "helmet"; 
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 4000;
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'","http://localhost:3000"],
+      scriptSrc: ["'self'","http://localhost:3000"], 
+      styleSrc: ["'self'","http://localhost:3000"],   
+    },
+  })
+);
 //singleton pattern to create one object from the connection class and freeze it
 const instance = new Connection()
 Object.freeze(instance)

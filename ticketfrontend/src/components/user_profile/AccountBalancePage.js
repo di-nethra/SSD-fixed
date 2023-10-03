@@ -31,6 +31,16 @@ const AccountBalancePage = () => {
   }, []);
   
   const [credit, setCredit] = useState([]);
+
+  function sanitizeInput(input) {
+    console.log(input);
+    if(!input){
+      return null
+    }else{
+
+    return input.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+  }
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -74,7 +84,7 @@ const AccountBalancePage = () => {
                     }}
                     variant="body2"
                   >
-                    Last Added Date: {credit.date}
+                      Last Added Date: {sanitizeInput(credit.date)}
                   </Typography>
                   <Typography
                     style={{
