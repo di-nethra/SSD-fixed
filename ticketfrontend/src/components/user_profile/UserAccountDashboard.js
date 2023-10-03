@@ -39,6 +39,14 @@ const UserAccountDashboard = () => {
       });
   };
 
+  const isValidUsername = (username) => {
+    return /^[A-Za-z]+$/.test(username);
+  };
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "5px" }}>
@@ -150,18 +158,14 @@ const UserAccountDashboard = () => {
         </Grid>
         <Grid item xs={4}>
           <Card sx={{ minWidth: 475 }} style={{ backgroundColor: "#f5f5f5",textAlign:"center"  }}>
-            <CardContent>
-              <img
-                src={profileIcon}
-                alt="profileIcon"
-                style={{ width: "150px" }}
-              />
+          <CardContent>
+              <img src={profileIcon} alt="profileIcon" style={{ width: "150px" }} />
               <Typography sx={{ fontSize: 32 }}>
                 <hr style={{ marginLeft: "60px", marginRight: "60px" }} />
-                {user.userName}
+                {isValidUsername(user.userName) ? user.userName : "Invalid Username"}
               </Typography>
               <Typography style={{ marginTop: "20px" }} variant="body2">
-                {user.email}
+                {isValidEmail(user.email) ? user.email : "Invalid Email"}
               </Typography>
             </CardContent>
 
