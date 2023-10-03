@@ -11,7 +11,7 @@ import profileIcon from "../../Assests/userProfileImage.png";
 import { CreditCard } from "@mui/icons-material";
 const UserAccountDashboard = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
-
+  console.log("user",user);
   const accountPage = () => {
     window.location.href = `/accountBalance`;
   }
@@ -23,7 +23,7 @@ const UserAccountDashboard = () => {
   const deleteProfile = () => {
    
     axios
-      .delete(`http://localhost:5000/ts/profile/${user._id}`)
+      .delete(`http://localhost:4000/ts/profile/${user._id}`)
       .then((res) => {
         console.log(res);
         window.confirm("Do you want to delete your profile?");

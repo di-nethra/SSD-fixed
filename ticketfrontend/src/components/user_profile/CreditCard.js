@@ -17,7 +17,7 @@ const AddCredits = () => {
     const [expDate,setExpDate]=useState("");
 
     const handleAddCreditCard=()=>{
-        axios.post("http://localhost:5000/ts/creditCard",{
+        axios.post("http://localhost:4000/ts/creditCard",{
             userId: user.userName,
             creditCard:cardNumber,
             cvc:cvc,

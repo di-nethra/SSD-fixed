@@ -14,7 +14,7 @@ const AccountBalancePage = () => {
 
 useEffect(() => {
     axios
-      .get("http://localhost:5000/ts/journey")
+      .get("http://localhost:4000/ts/journey")
       .then((res) => {
         setJourney(res.data);
         console.log(res)

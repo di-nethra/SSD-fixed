@@ -16,7 +16,7 @@ const AccountBalancePage = () => {
 
   useEffect(() => {
     axios
-  .get("http://localhost:5000/ts/credit")
+  .get("http://localhost:4000/ts/credit")
   .then((res) => {
     console.log(res.data);
     for(let i=0;i<res.data.length;i++){

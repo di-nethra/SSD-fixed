@@ -75,7 +75,7 @@ export default function DriverAccountTabs() {
 
   const deleteProfile = () => {
     axios
-      .delete(`http://localhost:5000/ts/profile/${user._id}`)
+      .delete(`http://localhost:4000/ts/profile/${user._id}`)
       .then((res) => {
         console.log(res);
         window.confirm("Do you want to delete your profile?");
@@ -114,7 +114,7 @@ export default function DriverAccountTabs() {
   }
 
   const  handleOtRequest=async()=>{
-    await axios.post("http://localhost:5000/ts/ot",{
+    await axios.post("http://localhost:4000/ts/ot",{
         userName:loggedUserName,
         date:date,
         shift:shift,

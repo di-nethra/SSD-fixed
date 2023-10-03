@@ -61,7 +61,7 @@ export default function OtTabs() {
     }
 
     axios
-      .get("http://localhost:5000/ts/ot")
+      .get("http://localhost:4000/ts/ot")
       .then((res) => {
         console.log(res.data);
 

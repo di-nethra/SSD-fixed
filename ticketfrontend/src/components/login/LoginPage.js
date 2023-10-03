@@ -6,23 +6,25 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import loginImage from "../../Assests/login.png";
-import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Alert, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import axios from "axios";
+import {gapi} from "gapi-script"
+import { GoogleLogin } from "react-google-login";
 const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleAddCredits = () => {
     axios
-      .get("http://localhost:5000/ts/profile")
+      .get("http://localhost:4000/ts/profile")
       .then((res) => {
         console.log(res.data);
-        for(let i=0;i<res.data.length;i++){
-          if(res.data[i].userName === userName && res.data[i].password === password){
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].userName === userName && res.data[i].password === password) {
             alert("Successfuly loggedIn!")
-        localStorage.setItem("loggedInUser", JSON.stringify(res.data[i]));
-        window.location.href = `/${res.data[i].role}/Account`;
-        break;
+            localStorage.setItem("loggedInUser", JSON.stringify(res.data[i]));
+            window.location.href = `/${res.data[i].role}/Account`;
+            break;
           }
         }
       })
@@ -31,6 +33,37 @@ const LoginPage = () => {
       });
   };
 
+
+
+  const responseSuccessGoogle = async(response) => {
+    if (response && response.profileObj && response.profileObj.email) {
+      alert("Login successful!");
+      await axios
+      .get("http://localhost:4000/ts/profile")
+      .then((res) => {
+        console.log(res.data);
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].userName === "anjana" && res.data[i].password === 123) {
+            alert("Successfuly loggedIn!")
+            localStorage.setItem("loggedInUser", JSON.stringify(res.data[i]));
+            window.location.href = `/${res.data[i].role}/Account`;
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      window.location.href = '/customer/Account'
+    } else {
+      alert("Login failed. Please try again.");
+    }
+  };
+  
+  const responseErrorGoogle = (response) => {
+    alert("An error occurred during login. Please try again later.");
+    console.log(response);
+  };
   return (
     <div>
       <Grid container spacing={4} style={{ marginTop: "100px" }}>
@@ -92,10 +125,10 @@ const LoginPage = () => {
                     }}
                   />
                   <br />
-                    <div style={{marginTop:"30px",marginLeft:"40px"}}>
-                    <a  href="/register">Not a registered user? Sign Up!</a>
-                    </div>
-                
+                  <div style={{ marginTop: "30px", marginLeft: "40px" }}>
+                    <a href="/register">Not a registered user? Sign Up!</a>
+                  </div>
+
 
                   <CardActions
                     style={{
@@ -105,6 +138,14 @@ const LoginPage = () => {
                       marginRight: "100px",
                     }}
                   >
+                    <GoogleLogin
+                      clientId="334897036847-53pqubjaq1an6rsae09aes4dbslbro5j.apps.googleusercontent.com"
+                      buttonText="Login with Google"
+                      onSuccess={responseSuccessGoogle}
+                      onFailure={responseErrorGoogle}
+                      cookiePolicy={"single_host_origin"}
+                      isSignedIn={true}
+                    />
                     <Button
                       color="warning"
                       variant="contained"

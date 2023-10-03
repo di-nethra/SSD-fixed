@@ -14,7 +14,7 @@ const AddCredits = () => {
 
   useEffect(() => {
     axios
-  .get("http://localhost:5000/ts/creditCard")
+  .get("http://localhost:4000/ts/creditCard")
   .then((res) => {
     for(let i=0;i<res.data.length;i++){
       if(res.data[i].userId === user.userName){
@@ -31,7 +31,7 @@ const [card, setCard] = useState([]);
 
 useEffect(() => {
   axios
-.get("http://localhost:5000/ts/credit")
+.get("http://localhost:4000/ts/credit")
 .then((res) => {
   for(let i=0;i<res.data.length;i++){
     if(res.data[i].userName === user.userName){
@@ -52,7 +52,7 @@ console.log(credit.amount)
       const [amount,setAmount]=useState(0);
 
     const handleAddCredits=()=>{
-      axios.post(`http://localhost:5000/ts/credit/`,{
+      axios.post(`http://localhost:4000/ts/credit/`,{
         userName:user.userName,
         amount:amount,
         lastAdded:amount,
@@ -69,7 +69,7 @@ console.log(credit.amount)
     }
 
     const handleUpdateCredits=()=>{
-      axios.put(`http://localhost:5000/ts/credit/${credit._id}`,{
+      axios.put(`http://localhost:4000/ts/credit/${credit._id}`,{
           userName:user.userName,
           amount:credit.amount+amount,
           lastAdded:amount,

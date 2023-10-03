@@ -17,10 +17,21 @@ import Journey from "./components/user_profile/journey"
 import CreditCard from "./components/user_profile/CreditCard"
 import EditCreditCard from "./components/user_profile/editCreditCard"
 import BookJoueney from "./components/user_profile/journeyBook"
-
+import {gapi} from 'gapi-script'
+import { useEffect } from "react";
 
 
 function App() {
+
+  useEffect(()=>{
+    function start(){
+    gapi.client.init({
+        clientId:"334897036847-53pqubjaq1an6rsae09aes4dbslbro5j.apps.googleusercontent.com",
+        scope: ""
+    })
+    }
+    gapi.load('client:auth2',start)
+    })
   return (
     <>
     <NavBar />

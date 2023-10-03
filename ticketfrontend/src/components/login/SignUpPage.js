@@ -34,7 +34,7 @@ const SignUpPage = () => {
       role:role
     }
     axios
-      .post("http://localhost:5000/ts/profile", data)
+      .post("http://localhost:4000/ts/profile", data)
       .then((res) => {
         console.log(res);
         alert("Successfuly Registered!")

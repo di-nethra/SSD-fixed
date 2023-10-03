@@ -18,7 +18,7 @@ const AccountBalancePage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/ts/journey")
+      .get("http://localhost:4000/ts/journey")
       .then((res) => {
         setJourney(res.data);
       })
@@ -30,7 +30,7 @@ const AccountBalancePage = () => {
 
   const bookSeats = () => {
     axios
-      .post(`http://localhost:5000/ts/tickets/`, {
+      .post(`http://localhost:4000/ts/tickets/`, {
         userName: user.userName,
         journeyId: id,
         seats: seat,
@@ -43,7 +43,7 @@ const AccountBalancePage = () => {
       });
 
       axios
-      .get(`http://localhost:5000/ts/journey/${id}`)
+      .get(`http://localhost:4000/ts/journey/${id}`)
       .then((res) => {
         console.log(res.data);
         setSelectedJoueney(res.data)
@@ -55,7 +55,7 @@ const AccountBalancePage = () => {
       
 
       axios
-      .put(`http://localhost:5000/ts/journey/${id}`, {
+      .put(`http://localhost:4000/ts/journey/${id}`, {
         jouneyCode: selectedJourney.jouneyCode,
         startUpLocation: selectedJourney.startUpLocation,
         destination: selectedJourney.destination,

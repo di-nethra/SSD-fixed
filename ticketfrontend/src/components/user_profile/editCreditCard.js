@@ -15,7 +15,7 @@ const AddCredits = () => {
 
     useEffect(() => {
         axios
-      .get("http://localhost:5000/ts/creditCard")
+      .get("http://localhost:4000/ts/creditCard")
       .then((res) => {
         console.log(res.data);
         for(let i=0;i<res.data.length;i++){
@@ -35,7 +35,7 @@ const AddCredits = () => {
     const [expDate,setExpDate]=useState(card.expDate);
 
     const handleEditCreditCard=()=>{
-        axios.put(`http://localhost:5000/ts/creditCard/${card._id}`,{
+        axios.put(`http://localhost:4000/ts/creditCard/${card._id}`,{
             userId: user.userName,
             creditCard:cardNumber,
             cvc:cvc,
