@@ -1,21 +1,36 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-export class Connection{
-  constructor(){}
+dotenv.config(); // Load environment variables from .env filea
+
+export class Connection {
+  constructor() {}
+
   connect = () => {
-    mongoose.connect("mongodb+srv://anjanadinethra:8682123abc@cluster0.zxqokt6.mongodb.net/?retryWrites=true&w=majority", {
+    const dbConnectionString = process.env.DB_CONNECTION_STRING;
+
+    if (!dbConnectionString) {
+      console.error("DB_CONNECTION_STRING not found in .env file.");
+      return;
+    }
+
+    mongoose.connect(dbConnectionString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+
     mongoose.connection.once("open", () => {
-      console.log("connected to MongoDb");
+      console.log("Connected to MongoDB");
+    });
+
+    mongoose.connection.on("error", (err) => {
+      console.error("MongoDB connection error:", err);
     });
   };
-  
+
   disconnect = (done) => {
     mongoose.disconnect(done);
   };
 }
-
 
 
